@@ -1,18 +1,25 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+
 import { getEvents, getMedia, getPosts, getFeaturedMedia } from '../utils/wordpress';
 
 import Post from "../components/Post";
+import Event from "../components/Event";
 
 export default function Home({posts, events, media}) {
-
 
   const jsxPosts = posts.map(post => {
     const featuredMediaId = post["featured_media"];
     const featuredMedia = getFeaturedMedia(media, featuredMediaId);
     return (
       <Post post={post} featuredMedia={featuredMedia} key={post.id}/>
+    )
+  });
+
+  const jsxEvents = events.map(event => {
+    const featuredMediaId = event["featured_media"];
+    const featuredMedia = getFeaturedMedia(media, featuredMediaId);
+    return (
+      <Event event={event} featuredMedia={featuredMedia} key={event.id}/>
     )
   });
 
@@ -28,19 +35,20 @@ export default function Home({posts, events, media}) {
       <div className="container pt-5">
         <h1 className="text-center pb-5">Tech BLog</h1>
         <div className="row">
-          <div className="col col-md-8">
-            <h2>Our blog posts</h2>
+          <div className="col-lg-8">
+            <h2 className="pb-3">Our blog posts</h2>
             {jsxPosts}
           </div>
-          <div className="col col-md-4">
-            {/* <Products products={products}/> */}
-            <h2>Events</h2>
+          <div className="col-lg-4">
+            <h2 className="pb-3">Events</h2>
+            {jsxEvents}
           </div>
         </div>
       </div>
 
     </>
   )
+  
 }
 
 export async function getStaticProps({ params }) {

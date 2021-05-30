@@ -19,23 +19,29 @@ export async function getEvents() {
 }
 
 export async function getEvent(slug) {
-    const events = await getPosts();
+    const events = await getEvents();
     const eventArray = events.filter(event => event.slug == slug);
     const event = eventArray.length > 0 ? eventArray[0] : null;
     return event;    
 }
 
 
-export async function getPostsSlugs() {
-    const posts = await getPosts();
-    const postsIds = posts.map(post => { 
+export async function getSlugs(type) {
+    let elements = [];
+    switch (type){
+        case "posts":
+            elements = await getPosts();
+        case "events":
+            elements = await getEvents();
+    }
+    const elementsIds = elements.map(element => { 
         return { 
             params: {
-                slug: post.slug
+                slug: element.slug
             }
         }
     });
-   return postsIds;    
+   return elementsIds;    
 }
 
 export async function getMedia() {

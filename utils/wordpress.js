@@ -31,8 +31,10 @@ export async function getSlugs(type) {
     switch (type){
         case "posts":
             elements = await getPosts();
+        break;
         case "events":
             elements = await getEvents();
+        break;
     }
     const elementsIds = elements.map(element => { 
         return { 

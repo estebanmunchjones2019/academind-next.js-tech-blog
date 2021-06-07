@@ -28,7 +28,7 @@ export async function getStaticPaths() {
   
   }
   
-  //access the router, get the id, and get the medatada for that post
+  //access the router, get the id, and get the data for that post
   
   export async function getStaticProps({ params }) {
   

@@ -14,7 +14,7 @@ export default function PostPage({post}){
     )
 }
 
-  //hey Next, these are the possible slugs
+//hey Next, these are the possible slugs
 export async function getStaticPaths() {
 
     const paths = await getSlugs("posts");
@@ -28,18 +28,18 @@ export async function getStaticPaths() {
   
   }
   
-  //access the router, get the id, and get the medatada for that post
-  
-  export async function getStaticProps({ params }) {
-  
-    const post = await getPost(params.slug);
-  
-    return {
-      props: {
-        post
-      },
-      revalidate: 10, // In seconds
-    }
-  
-  }
+//access the router, get the id, and get the data for that post
+
+export async function getStaticProps({ params }) {
+
+const post = await getPost(params.slug);
+
+return {
+    props: {
+    post
+    },
+    revalidate: 10, // In seconds
+}
+
+}
 

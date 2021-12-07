@@ -1,23 +1,21 @@
 import Head from 'next/head'
 
-import { getEvents, getMedia, getPosts, getFeaturedMedia } from '../utils/wordpress';
+import { getEvents, getPosts } from '../utils/wordpress';
 
 import Post from "../components/Post";
 import Event from "../components/Event";
 
-export default function Home({posts, events, media}) {
+export default function Home({posts, events}) {
 
   const jsxPosts = posts.map(post => {
-    const featuredMediaId = post["featured_media"];
-    const featuredMedia = getFeaturedMedia(media, featuredMediaId);
+    const featuredMedia = post['_embedded']['wp:featuredmedia'][0];
     return (
       <Post post={post} featuredMedia={featuredMedia} key={post.id}/>
     )
   });
 
   const jsxEvents = events.map(event => {
-    const featuredMediaId = event["featured_media"];
-    const featuredMedia = getFeaturedMedia(media, featuredMediaId);
+    const featuredMedia = event['_embedded']['wp:featuredmedia'][0];
     return (
       <Event event={event} featuredMedia={featuredMedia} key={event.id}/>
     )
@@ -54,13 +52,10 @@ export async function getStaticProps({ params }) {
 
   const posts = await getPosts();
   const events = await getEvents();
-  const media = await getMedia();
-
   return {
     props: {
      posts,
-     events,
-     media
+     events
     },
     revalidate: 10, // In seconds
   }

@@ -23,29 +23,25 @@ export default function Home({posts, events}) {
 
   return (
     <>
-      <Head>
-        <title>Tech Blog</title>
-        <meta name="description" content="Keep up to date with the latest trends in tech" />
+       <Head>
+        <title>
+          No.1 Tamil news website in the world | Latest Tamil News - Dinamalar
+        </title>
+        <meta
+          name="description"
+          content="Keep up to date with the latest trends in tech"
+        />
         <link rel="icon" href="/favicon.ico" />
         {/* You can add more metadata here, like open graph tags for social media, etc */}
       </Head>
 
-      <div className="container pt-5">
-        <h1 className="text-center pb-5">Tech Blog 1</h1>
+      <div className="container pt-5" style={{ margin: "2em" }}>
         <div className="row">
-          <div className="col-lg-8">
-            <h2 className="pb-3">Our blog posts</h2>
-            {jsxPosts}
-          </div>
-          <div className="col-lg-4">
-            <h2 className="pb-3">Events</h2>
-            {jsxEvents}
-          </div>
+          <div className="col-lg-12">{jsxPosts}</div>
         </div>
       </div>
     </>
-  )
-
+  );
 }
 
 export async function getStaticProps({ params }) {
